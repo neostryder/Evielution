@@ -9,9 +9,9 @@ visibility: unlisted
 featured: true
 simulated: true
 tags:
-  - media
-  - audio
-  - experiments
+    - media
+    - audio
+    - experiments
 callToAction: Enter the media room
 ---
 

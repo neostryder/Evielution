@@ -9,9 +9,9 @@ visibility: unlisted
 featured: false
 simulated: true
 tags:
-  - workshop
-  - process
-  - drafts
+    - workshop
+    - process
+    - drafts
 callToAction: See what is brewing
 ---
 

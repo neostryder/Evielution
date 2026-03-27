@@ -8,9 +8,9 @@ visibility: unlisted
 featured: false
 simulated: true
 tags:
-  - journal
-  - letter
-  - process
+    - journal
+    - letter
+    - process
 publishedAt: 2026-03-29
 ---
 

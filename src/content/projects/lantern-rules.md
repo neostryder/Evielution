@@ -9,9 +9,9 @@ visibility: unlisted
 featured: false
 simulated: true
 tags:
-  - games
-  - mechanics
-  - playtest
+    - games
+    - mechanics
+    - playtest
 callToAction: Visit the game board
 ---
 

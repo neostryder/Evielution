@@ -8,9 +8,9 @@ visibility: unlisted
 featured: true
 simulated: true
 tags:
-  - notes
-  - future
-  - mapmaking
+    - notes
+    - future
+    - mapmaking
 publishedAt: 2026-03-28
 ---
 

@@ -9,9 +9,9 @@ visibility: unlisted
 featured: false
 simulated: true
 tags:
-  - music
-  - rehearsal
-  - atmosphere
+    - music
+    - rehearsal
+    - atmosphere
 callToAction: Step into the music room
 ---
 

@@ -9,9 +9,9 @@ visibility: unlisted
 featured: false
 simulated: true
 tags:
-  - worldbuilding
-  - atlas
-  - motifs
+    - worldbuilding
+    - atlas
+    - motifs
 callToAction: Explore the lore garden
 ---
 
