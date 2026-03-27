@@ -1,0 +1,10 @@
+---
+const { title, href, blurb, badge, tone = "default" } = Astro.props;
+---
+
+<a class:list={["map-card", `tone-${tone}`]} href={href}>
+  <span class="map-badge">{badge}</span>
+  <h3>{title}</h3>
+  <p>{blurb}</p>
+  <span class="map-link">Enter room</span>
+</a>

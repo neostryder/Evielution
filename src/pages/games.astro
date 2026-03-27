@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const items = (await getCollection("projects"))
+  .filter((entry) => entry.data.category === "games")
+  .sort((left, right) => Number(right.data.featured) - Number(left.data.featured));
+---
+
+<BaseLayout title="Games" description="Concepts, mechanics, and playful system sketches." currentPath="/games">
+  <section class="page-intro panel">
+    <p class="eyebrow">Game board</p>
+    <h1>Rules, systems, and sketches before they become finished games.</h1>
+    <p>
+      This room is for mechanics, prototypes, and concept structures. It should feel like a table full of cards,
+      notes, and promising experiments.
+    </p>
+  </section>
+
+  <section class="panel stack">
+    <h2>Current concepts</h2>
+    <ul class="card-list">
+      {
+        items.map((entry) => (
+          <li class="entry-card">
+            <span class="pill">{entry.data.status}</span>
+            <h3>
+              <a href={`/projects/${entry.slug}/`}>{entry.data.title}</a>
+            </h3>
+            <p>{entry.data.summary}</p>
+            <div class="meta-row">
+              {entry.data.tags.map((tag) => <span class="pill">{tag}</span>)}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

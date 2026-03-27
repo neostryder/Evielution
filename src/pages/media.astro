@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const items = (await getCollection("projects"))
+  .filter((entry) => entry.data.category === "media")
+  .sort((left, right) => Number(right.data.featured) - Number(left.data.featured));
+---
+
+<BaseLayout title="Media" description="Audio, video, podcast, and embedded media experiments." currentPath="/media">
+  <section class="page-intro panel">
+    <p class="eyebrow">Media room</p>
+    <h1>A flexible room for recordings, video, and future embedded work.</h1>
+    <p>
+      This room starts simple on purpose. It creates a clear destination for audio and video now, without forcing a
+      complicated media system before the assets are ready.
+    </p>
+  </section>
+
+  <section class="panel stack">
+    <h2>What is planned</h2>
+    <ul class="card-list">
+      {
+        items.map((entry) => (
+          <li class="entry-card">
+            <span class="pill">{entry.data.status}</span>
+            <h3>
+              <a href={`/projects/${entry.slug}/`}>{entry.data.title}</a>
+            </h3>
+            <p>{entry.data.summary}</p>
+            <div class="meta-row">
+              {entry.data.tags.map((tag) => <span class="pill">{tag}</span>)}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

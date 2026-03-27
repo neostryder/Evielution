@@ -1,0 +1,43 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const items = (await getCollection("projects"))
+  .filter((entry) => entry.data.category === "worldbuilding")
+  .sort((left, right) => Number(right.data.featured) - Number(left.data.featured));
+---
+
+<BaseLayout
+  title="Worldbuilding"
+  description="Connected lore, settings, and fragments from Evie's creative worlds."
+  currentPath="/worldbuilding"
+>
+  <section class="page-intro panel">
+    <p class="eyebrow">Lore garden</p>
+    <h1>The place where songs, stories, and games start sharing the same roots.</h1>
+    <p>
+      Worldbuilding is the connective tissue of the site. It gives otherwise separate ideas a sense of kinship and
+      continuity.
+    </p>
+  </section>
+
+  <section class="panel stack">
+    <h2>Current world notes</h2>
+    <ul class="card-list">
+      {
+        items.map((entry) => (
+          <li class="entry-card">
+            <span class="pill">{entry.data.status}</span>
+            <h3>
+              <a href={`/projects/${entry.slug}/`}>{entry.data.title}</a>
+            </h3>
+            <p>{entry.data.summary}</p>
+            <div class="meta-row">
+              {entry.data.tags.map((tag) => <span class="pill">{tag}</span>)}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

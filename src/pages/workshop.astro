@@ -1,0 +1,54 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const items = (await getCollection("projects"))
+  .filter((entry) => entry.data.category === "workshop")
+  .sort((left, right) => Number(right.data.featured) - Number(left.data.featured));
+---
+
+<BaseLayout
+  title="Workshop"
+  description="A visible workbench for unfinished ideas, drafts, and things in motion."
+  currentPath="/workshop"
+>
+  <section class="page-intro panel">
+    <p class="eyebrow">Workshop</p>
+    <h1>The unfinished part of the house is part of the point.</h1>
+    <p>
+      Evielution is not only a gallery. The workshop keeps drafts, experiments, and evolving material visible without
+      pretending they are final.
+    </p>
+  </section>
+
+  <section class="note-grid">
+    <div class="callout">
+      <h3>Gallery mode</h3>
+      <p>Share the polished pieces that are ready for easy browsing.</p>
+    </div>
+    <div class="callout">
+      <h3>Workshop mode</h3>
+      <p>Share the pieces that are alive, unfinished, and still changing.</p>
+    </div>
+  </section>
+
+  <section class="panel stack">
+    <h2>Current workbenches</h2>
+    <ul class="card-list">
+      {
+        items.map((entry) => (
+          <li class="entry-card">
+            <span class="pill">{entry.data.status}</span>
+            <h3>
+              <a href={`/projects/${entry.slug}/`}>{entry.data.title}</a>
+            </h3>
+            <p>{entry.data.summary}</p>
+            <div class="meta-row">
+              {entry.data.tags.map((tag) => <span class="pill">{tag}</span>)}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

@@ -1,0 +1,75 @@
+---
+import "../styles/global.css";
+
+const {
+  title = "Evielution",
+  description = "A creative home base for music, writing, games, worldbuilding, and works in progress.",
+  currentPath = "/",
+} = Astro.props;
+
+const navItems = [
+  { href: "/", label: "Home" },
+  { href: "/music", label: "Music" },
+  { href: "/writing", label: "Writing" },
+  { href: "/games", label: "Games" },
+  { href: "/worldbuilding", label: "Worldbuilding" },
+  { href: "/media", label: "Media" },
+  { href: "/workshop", label: "Workshop" },
+  { href: "/about", label: "About" },
+  { href: "/contact", label: "Contact" },
+];
+
+const pageTitle = title === "Evielution" ? title : `${title} | Evielution`;
+const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString();
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content={description} />
+    <meta name="generator" content={Astro.generator} />
+    <link rel="canonical" href={canonical} />
+    <title>{pageTitle}</title>
+  </head>
+  <body>
+    <div class="site-shell">
+      <header class="site-header">
+        <a class="brand" href="/">
+          <span class="brand-mark">E</span>
+          <span>
+            <strong>Evielution</strong>
+            <small>An evolving creative home</small>
+          </span>
+        </a>
+
+        <nav class="site-nav" aria-label="Primary">
+          {
+            navItems.map((item) => {
+              const isActive =
+                item.href === "/"
+                  ? currentPath === "/"
+                  : currentPath === item.href || currentPath.startsWith(`${item.href}/`);
+
+              return (
+                <a class:list={["nav-link", { active: isActive }]} href={item.href}>
+                  {item.label}
+                </a>
+              );
+            })
+          }
+        </nav>
+      </header>
+
+      <main class="page-shell">
+        <slot />
+      </main>
+
+      <footer class="site-footer">
+        <p>Evielution is a creative home base for songs, stories, sketches, systems, and works in progress.</p>
+        <p class="footer-note">Built for GitHub Pages, with room to grow into a custom domain later.</p>
+      </footer>
+    </div>
+  </body>
+</html>

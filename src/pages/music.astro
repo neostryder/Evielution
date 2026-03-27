@@ -1,0 +1,39 @@
+---
+import { getCollection } from "astro:content";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const items = (await getCollection("projects"))
+  .filter((entry) => entry.data.category === "music")
+  .sort((left, right) => Number(right.data.featured) - Number(left.data.featured));
+---
+
+<BaseLayout title="Music" description="Lead sheets, compositions, and future recordings." currentPath="/music">
+  <section class="page-intro panel">
+    <p class="eyebrow">Music room</p>
+    <h1>Where the lead sheets start singing first.</h1>
+    <p>
+      Music is the clearest launch point for Evielution. This room is where lead sheets can live now, while
+      recordings, arrangements, and albums arrive later.
+    </p>
+  </section>
+
+  <section class="panel stack">
+    <h2>Current shelves</h2>
+    <ul class="card-list">
+      {
+        items.map((entry) => (
+          <li class="entry-card">
+            <span class="pill">{entry.data.status}</span>
+            <h3>
+              <a href={`/projects/${entry.slug}/`}>{entry.data.title}</a>
+            </h3>
+            <p>{entry.data.summary}</p>
+            <div class="meta-row">
+              {entry.data.tags.map((tag) => <span class="pill">{tag}</span>)}
+            </div>
+          </li>
+        ))
+      }
+    </ul>
+  </section>
+</BaseLayout>

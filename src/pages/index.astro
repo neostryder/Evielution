@@ -1,0 +1,158 @@
+---
+import { getCollection } from "astro:content";
+import MapCard from "../components/MapCard.astro";
+import BaseLayout from "../layouts/BaseLayout.astro";
+
+const projects = await getCollection("projects");
+const writing = await getCollection("writing");
+
+const categoryCount = (category: "music" | "games" | "worldbuilding" | "media" | "workshop") =>
+  projects.filter((entry) => entry.data.category === category).length;
+
+const zones = [
+  {
+    title: "Music room",
+    href: "/music",
+    blurb: "Lead sheets, songs, and future recordings that already have a heartbeat.",
+    badge: `${categoryCount("music")} collection${categoryCount("music") === 1 ? "" : "s"}`,
+    tone: "music",
+  },
+  {
+    title: "Writing desk",
+    href: "/writing",
+    blurb: "Journal fragments, essays, fiction seeds, and welcoming notes from the process.",
+    badge: `${writing.length} entr${writing.length === 1 ? "y" : "ies"}`,
+    tone: "writing",
+  },
+  {
+    title: "Game board",
+    href: "/games",
+    blurb: "Mechanics, sketches, and systems-thinking experiments for future play.",
+    badge: `${categoryCount("games")} concept${categoryCount("games") === 1 ? "" : "s"}`,
+    tone: "games",
+  },
+  {
+    title: "Lore garden",
+    href: "/worldbuilding",
+    blurb: "Connected worlds, motifs, and notes that tie stories, games, and songs together.",
+    badge: `${categoryCount("worldbuilding")} world${categoryCount("worldbuilding") === 1 ? "" : "s"}`,
+    tone: "worldbuilding",
+  },
+  {
+    title: "Media room",
+    href: "/media",
+    blurb: "A future home for recordings, video, podcast work, and embedded experiments.",
+    badge: `${categoryCount("media")} seed${categoryCount("media") === 1 ? "" : "s"}`,
+    tone: "media",
+  },
+  {
+    title: "Workshop",
+    href: "/workshop",
+    blurb: "The in-progress side of the house, where drafts and sparks stay visible.",
+    badge: `${categoryCount("workshop")} workbench${categoryCount("workshop") === 1 ? "" : "es"}`,
+    tone: "workshop",
+  },
+];
+
+const featuredProjects = projects.filter((entry) => entry.data.featured).slice(0, 4);
+const featuredWriting = writing.filter((entry) => entry.data.featured).slice(0, 3);
+---
+
+<BaseLayout
+  title="Evielution"
+  description="A map-like creative home for songs, stories, games, and works in progress."
+  currentPath="/"
+>
+  <section class="hero panel">
+    <p class="eyebrow">Creative home base</p>
+    <h1>Evielution is a living map of what Evie is making.</h1>
+    <p class="lede">
+      This site is designed to feel less like a corporate portfolio and more like an explorable house of rooms:
+      music, writing, games, worldbuilding, media, and the workshop where unfinished ideas stay alive.
+    </p>
+
+    <div class="stat-grid">
+      <div class="stat-card">
+        <strong>{projects.length}</strong>
+        <span>starter project spaces</span>
+      </div>
+      <div class="stat-card">
+        <strong>{writing.length}</strong>
+        <span>writing entries</span>
+      </div>
+      <div class="stat-card">
+        <strong>2</strong>
+        <span>modes: Gallery and Workshop</span>
+      </div>
+      <div class="stat-card">
+        <strong>1</strong>
+        <span>creative universe in progress</span>
+      </div>
+    </div>
+  </section>
+
+  <section class="page-section">
+    <div class="section-header">
+      <div>
+        <p class="eyebrow">Site map</p>
+        <h2>Choose a room and start exploring</h2>
+      </div>
+      <p>Playful on the surface, tidy underneath.</p>
+    </div>
+
+    <div class="map-grid">
+      {zones.map((zone) => <MapCard {...zone} />)}
+    </div>
+  </section>
+
+  <section class="two-column">
+    <div class="panel stack">
+      <div>
+        <p class="eyebrow">Featured rooms</p>
+        <h2>What already has a pulse</h2>
+      </div>
+
+      <ul class="card-list">
+        {
+          featuredProjects.map((entry) => (
+            <li class="entry-card">
+              <span class="pill">{entry.data.category}</span>
+              <h3>
+                <a href={`/projects/${entry.slug}/`}>{entry.data.title}</a>
+              </h3>
+              <p>{entry.data.summary}</p>
+              <div class="meta-row">
+                <span class="pill">{entry.data.status}</span>
+                {entry.data.tags.slice(0, 2).map((tag) => <span class="pill">{tag}</span>)}
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+
+    <div class="panel stack">
+      <div>
+        <p class="eyebrow">Writing desk</p>
+        <h2>Voice, process, and orientation</h2>
+      </div>
+
+      <ul class="card-list">
+        {
+          featuredWriting.map((entry) => (
+            <li class="entry-card">
+              <span class="pill">{entry.data.category}</span>
+              <h3>
+                <a href={`/writing/${entry.slug}/`}>{entry.data.title}</a>
+              </h3>
+              <p>{entry.data.summary}</p>
+              <div class="meta-row">
+                {entry.data.tags.slice(0, 3).map((tag) => <span class="pill">{tag}</span>)}
+              </div>
+            </li>
+          ))
+        }
+      </ul>
+    </div>
+  </section>
+</BaseLayout>
