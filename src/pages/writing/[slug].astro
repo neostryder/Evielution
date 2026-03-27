@@ -31,9 +31,24 @@ const publishedLabel = entry.data.publishedAt
     <div class="meta-row">
       <span class="pill">{publishedLabel}</span>
       <span class="pill">{entry.data.visibility}</span>
+      {entry.data.simulated && <span class="pill simulated-pill">simulated placeholder</span>}
       {entry.data.tags.map((tag) => <span class="pill">{tag}</span>)}
     </div>
+
+    {entry.data.image && <img class="feature-image" src={entry.data.image} alt={entry.data.imageAlt ?? entry.data.title} />}
   </section>
+
+  {
+    entry.data.simulated && (
+      <section class="content-note panel">
+        <strong>Placeholder notice</strong>
+        <p>
+          This writing entry is simulated placeholder material used to shape the tone and pacing of the site while the
+          real body of work is still being assembled.
+        </p>
+      </section>
+    )
+  }
 
   <article class="content-body panel">
     <Content />

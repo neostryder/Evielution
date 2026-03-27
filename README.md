@@ -70,6 +70,7 @@ Starter content lives in Astro content collections:
 - The first live URL is expected to be a project Pages URL for the `Evielution` repository.
 - A custom domain will likely be attached later.
 - Hidden-link sharing is acceptable for the first release.
+- Until Evie's own material is ready, the site may use clearly labeled simulated placeholder copy and imagery.
 
 ## GitHub Pages deployment
 
@@ -96,9 +97,12 @@ If the site moves to a custom domain later:
 - `title`
 - `summary`
 - `category`
+- `image`
+- `imageAlt`
 - `status`
 - `visibility`
 - `featured`
+- `simulated`
 - `tags`
 - `callToAction`
 
@@ -109,10 +113,17 @@ If the site moves to a custom domain later:
 - `title`
 - `summary`
 - `category`
+- `image`
+- `imageAlt`
 - `visibility`
 - `featured`
+- `simulated`
 - `tags`
 - `publishedAt`
+
+## Placeholder generation
+
+The current scaffold can use simulated placeholder imagery generated through the workspace tool at `.github/tools/evielution-placeholder-generator/`, which reuses QueueTip's existing fal.ai integration and writes durable assets into `public/images/generated/`.
 
 ## Limitations
 

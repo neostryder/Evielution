@@ -38,13 +38,21 @@ const items = (await getCollection("projects"))
       {
         items.map((entry) => (
           <li class="entry-card">
-            <span class="pill">{entry.data.status}</span>
-            <h3>
-              <a href={`/projects/${entry.slug}/`}>{entry.data.title}</a>
-            </h3>
-            <p>{entry.data.summary}</p>
-            <div class="meta-row">
-              {entry.data.tags.map((tag) => <span class="pill">{tag}</span>)}
+            {entry.data.image && (
+              <img class="entry-card-image" src={entry.data.image} alt={entry.data.imageAlt ?? entry.data.title} loading="lazy" />
+            )}
+            <div class="entry-card-copy">
+              <div class="meta-row compact-row">
+                <span class="pill">{entry.data.status}</span>
+                {entry.data.simulated && <span class="pill simulated-pill">simulated</span>}
+              </div>
+              <h3>
+                <a href={`/projects/${entry.slug}/`}>{entry.data.title}</a>
+              </h3>
+              <p>{entry.data.summary}</p>
+              <div class="meta-row">
+                {entry.data.tags.map((tag) => <span class="pill">{tag}</span>)}
+              </div>
             </div>
           </li>
         ))

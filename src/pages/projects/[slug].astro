@@ -23,9 +23,24 @@ const { Content } = await render(entry);
     <div class="meta-row">
       <span class="pill">{entry.data.status}</span>
       <span class="pill">{entry.data.visibility}</span>
+      {entry.data.simulated && <span class="pill simulated-pill">simulated placeholder</span>}
       {entry.data.tags.map((tag) => <span class="pill">{tag}</span>)}
     </div>
+
+    {entry.data.image && <img class="feature-image" src={entry.data.image} alt={entry.data.imageAlt ?? entry.data.title} />}
   </section>
+
+  {
+    entry.data.simulated && (
+      <section class="content-note panel">
+        <strong>Placeholder notice</strong>
+        <p>
+          This entry is simulated scaffolding for the shape and tone of the site. It is here to hold space until Evie's
+          own project notes, files, and visuals are ready.
+        </p>
+      </section>
+    )
+  }
 
   <article class="content-body panel">
     <Content />

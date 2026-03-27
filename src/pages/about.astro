@@ -1,16 +1,32 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+
+const aboutImagePath = "/images/generated/about-evie-placeholder.jpg";
+const aboutImageAlt =
+  "An imaginative placeholder portrait of a multidisciplinary artist surrounded by music, maps, and notebook fragments.";
 ---
 
 <BaseLayout title="About" description="About Evie and the creative purpose of Evielution." currentPath="/about">
-  <section class="page-intro panel">
-    <p class="eyebrow">About Evie</p>
-    <h1>A musician, composer, and multi-directional creative thinker.</h1>
-    <p>
-      Evie works across music, writing, games, worldbuilding, and other evolving ideas. Evielution exists to gather
-      those threads into one warm, explorable place instead of leaving them scattered across devices, notebooks, and
-      half-finished platforms.
-    </p>
+  <section class="about-hero panel">
+    <div>
+      <p class="eyebrow">About Evie</p>
+      <h1>A musician, composer, and multi-directional creative thinker.</h1>
+      <p>
+        Evie works across music, writing, games, worldbuilding, and other evolving ideas. Evielution exists to gather
+        those threads into one warm, explorable place instead of leaving them scattered across devices, notebooks, and
+        half-finished platforms.
+      </p>
+
+      <div class="content-note">
+        <strong>Current note:</strong>
+        <p>
+          This page is using simulated placeholder imagery and sample copy while Evie's own bio, portraits, and project
+          descriptions are still being gathered.
+        </p>
+      </div>
+    </div>
+
+    <img class="about-portrait" src={aboutImagePath} alt={aboutImageAlt} />
   </section>
 
   <section class="two-column">

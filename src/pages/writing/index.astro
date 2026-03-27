@@ -34,14 +34,22 @@ const formatDate = (value: Date | undefined) =>
       {
         items.map((entry) => (
           <li class="entry-card">
-            <span class="pill">{entry.data.category}</span>
-            <h3>
-              <a href={`/writing/${entry.slug}/`}>{entry.data.title}</a>
-            </h3>
-            <p>{entry.data.summary}</p>
-            <div class="meta-row">
-              <span class="pill">{formatDate(entry.data.publishedAt)}</span>
-              {entry.data.tags.map((tag) => <span class="pill">{tag}</span>)}
+            {entry.data.image && (
+              <img class="entry-card-image" src={entry.data.image} alt={entry.data.imageAlt ?? entry.data.title} loading="lazy" />
+            )}
+            <div class="entry-card-copy">
+              <div class="meta-row compact-row">
+                <span class="pill">{entry.data.category}</span>
+                {entry.data.simulated && <span class="pill simulated-pill">simulated</span>}
+              </div>
+              <h3>
+                <a href={`/writing/${entry.slug}/`}>{entry.data.title}</a>
+              </h3>
+              <p>{entry.data.summary}</p>
+              <div class="meta-row">
+                <span class="pill">{formatDate(entry.data.publishedAt)}</span>
+                {entry.data.tags.map((tag) => <span class="pill">{tag}</span>)}
+              </div>
             </div>
           </li>
         ))
