@@ -1,5 +1,6 @@
 ---
 import "../styles/global.css";
+import { withBasePath } from "../utils/site-paths";
 
 const {
   title = "Evielution",
@@ -36,7 +37,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString(
   <body>
     <div class="site-shell">
       <header class="site-header">
-        <a class="brand" href="/">
+        <a class="brand" href={withBasePath("/")}>
           <span class="brand-mark">E</span>
           <span>
             <strong>Evielution</strong>
@@ -53,7 +54,7 @@ const canonical = new URL(Astro.url.pathname, Astro.site ?? Astro.url).toString(
                   : currentPath === item.href || currentPath.startsWith(`${item.href}/`);
 
               return (
-                <a class:list={["nav-link", { active: isActive }]} href={item.href}>
+                <a class:list={["nav-link", { active: isActive }]} href={withBasePath(item.href)}>
                   {item.label}
                 </a>
               );

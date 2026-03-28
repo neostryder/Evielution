@@ -1,7 +1,8 @@
 ---
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBasePath } from "../utils/site-paths";
 
-const aboutImagePath = "/images/generated/about-evie-placeholder.jpg";
+const aboutImagePath = withBasePath("/images/generated/about-evie-placeholder.jpg");
 const aboutImageAlt =
   "An imaginative placeholder portrait of a multidisciplinary artist surrounded by music, maps, and notebook fragments.";
 ---

@@ -2,6 +2,7 @@
 import { getCollection } from "astro:content";
 import MapCard from "../components/MapCard.astro";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBasePath } from "../utils/site-paths";
 
 const projects = await getCollection("projects");
 const writing = await getCollection("writing");
@@ -110,7 +111,7 @@ const featuredWriting = writing.filter((entry) => entry.data.featured).slice(0, 
         featuredSpotlight?.data.image && (
           <img
             class="hero-spotlight"
-            src={featuredSpotlight.data.image}
+            src={withBasePath(featuredSpotlight.data.image)}
             alt={featuredSpotlight.data.imageAlt ?? featuredSpotlight.data.title}
           />
         )
@@ -146,7 +147,7 @@ const featuredWriting = writing.filter((entry) => entry.data.featured).slice(0, 
               {entry.data.image && (
                 <img
                   class="entry-card-image"
-                  src={entry.data.image}
+                  src={withBasePath(entry.data.image)}
                   alt={entry.data.imageAlt ?? entry.data.title}
                   loading="lazy"
                 />
@@ -157,7 +158,7 @@ const featuredWriting = writing.filter((entry) => entry.data.featured).slice(0, 
                   {entry.data.simulated && <span class="pill simulated-pill">simulated</span>}
                 </div>
                 <h3>
-                  <a href={`/projects/${entry.slug}/`}>{entry.data.title}</a>
+                  <a href={withBasePath(`/projects/${entry.slug}/`)}>{entry.data.title}</a>
                 </h3>
                 <p>{entry.data.summary}</p>
                 <div class="meta-row">
@@ -184,7 +185,7 @@ const featuredWriting = writing.filter((entry) => entry.data.featured).slice(0, 
               {entry.data.image && (
                 <img
                   class="entry-card-image"
-                  src={entry.data.image}
+                  src={withBasePath(entry.data.image)}
                   alt={entry.data.imageAlt ?? entry.data.title}
                   loading="lazy"
                 />
@@ -195,7 +196,7 @@ const featuredWriting = writing.filter((entry) => entry.data.featured).slice(0, 
                   {entry.data.simulated && <span class="pill simulated-pill">simulated</span>}
                 </div>
                 <h3>
-                  <a href={`/writing/${entry.slug}/`}>{entry.data.title}</a>
+                  <a href={withBasePath(`/writing/${entry.slug}/`)}>{entry.data.title}</a>
                 </h3>
                 <p>{entry.data.summary}</p>
                 <div class="meta-row">

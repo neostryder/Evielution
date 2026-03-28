@@ -1,8 +1,10 @@
 ---
+import { withBasePath } from "../utils/site-paths";
+
 const { title, href, blurb, badge, tone = "default" } = Astro.props;
 ---
 
-<a class:list={["map-card", `tone-${tone}`]} href={href}>
+<a class:list={["map-card", `tone-${tone}`]} href={withBasePath(href)}>
   <span class="map-badge">{badge}</span>
   <h3>{title}</h3>
   <p>{blurb}</p>

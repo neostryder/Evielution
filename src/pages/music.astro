@@ -1,6 +1,7 @@
 ---
 import { getCollection } from "astro:content";
 import BaseLayout from "../layouts/BaseLayout.astro";
+import { withBasePath } from "../utils/site-paths";
 
 const items = (await getCollection("projects"))
   .filter((entry) => entry.data.category === "music")
@@ -24,7 +25,7 @@ const items = (await getCollection("projects"))
         items.map((entry) => (
           <li class="entry-card">
             {entry.data.image && (
-              <img class="entry-card-image" src={entry.data.image} alt={entry.data.imageAlt ?? entry.data.title} loading="lazy" />
+              <img class="entry-card-image" src={withBasePath(entry.data.image)} alt={entry.data.imageAlt ?? entry.data.title} loading="lazy" />
             )}
             <div class="entry-card-copy">
               <div class="meta-row compact-row">
@@ -32,7 +33,7 @@ const items = (await getCollection("projects"))
                 {entry.data.simulated && <span class="pill simulated-pill">simulated</span>}
               </div>
               <h3>
-                <a href={`/projects/${entry.slug}/`}>{entry.data.title}</a>
+                <a href={withBasePath(`/projects/${entry.slug}/`)}>{entry.data.title}</a>
               </h3>
               <p>{entry.data.summary}</p>
               <div class="meta-row">

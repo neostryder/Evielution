@@ -1,6 +1,7 @@
 ---
 import { getCollection, render } from "astro:content";
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import { withBasePath } from "../../utils/site-paths";
 
 export async function getStaticPaths() {
   const entries = await getCollection("writing");
@@ -35,7 +36,7 @@ const publishedLabel = entry.data.publishedAt
       {entry.data.tags.map((tag) => <span class="pill">{tag}</span>)}
     </div>
 
-    {entry.data.image && <img class="feature-image" src={entry.data.image} alt={entry.data.imageAlt ?? entry.data.title} />}
+    {entry.data.image && <img class="feature-image" src={withBasePath(entry.data.image)} alt={entry.data.imageAlt ?? entry.data.title} />}
   </section>
 
   {
